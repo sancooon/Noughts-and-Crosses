@@ -5,6 +5,7 @@ public:
 	Board();
 	~Board();
 	void draw();
+	char checkWin();
 private:
 	struct Node {
 		bool occupied;
