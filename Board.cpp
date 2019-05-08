@@ -108,6 +108,21 @@ char Board::checkWin() {
 	return 'd';
 }
 
+void Board::makeTurn(char player, int row, int collumn) {
+	int iValue;
+
+	if (player == 'O') {
+		iValue = 1;
+	}
+	else {
+		iValue = 5;
+	}
+
+	board[row][collumn].occupied = true;
+	board[row][collumn].value = iValue;
+	board[row][collumn].player = player;
+}
+
 Board::~Board()
 {
 }
