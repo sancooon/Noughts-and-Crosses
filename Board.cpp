@@ -123,6 +123,15 @@ void Board::makeTurn(char player, int row, int collumn) {
 	board[row][collumn].player = player;
 }
 
+void Board::reset() {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			board[i][j].occupied = false;
+			board[i][j].value = 0;
+			board[i][j].player = NULL;
+		}
+	}
+}
 Board::~Board()
 {
 }
