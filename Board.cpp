@@ -132,6 +132,16 @@ void Board::reset() {
 		}
 	}
 }
+
+bool Board::isEmpty(int row, int col) {
+	if (board[row][col].occupied == true) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
 Board::~Board()
 {
 }
