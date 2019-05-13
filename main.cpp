@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <iostream>;
+#include "KeyMap.h";
 
 using namespace std;
 
@@ -10,6 +11,7 @@ void gameLoop(int mode);
 Board board;
 
 int main() {
+	initializeKeyBind();
 	cout << "Choose your game-mode\n";
 	cout << "1. Player vs Player\n";
 	cout << "2. Player vs Computer\n";
