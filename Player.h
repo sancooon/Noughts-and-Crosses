@@ -4,6 +4,7 @@
 #include "Board.h"
 #include <conio.h>
 #include <iostream>
+#include "KeyMap.h"
 
 using std::string;
 
@@ -17,10 +18,6 @@ public:
 	void makeTurn(Board &board);
 	
 private:
-	struct gridCoord{
-		int row;
-		int col;
-	};
 
 	void humanTurn(Board &board);
 	void cpuTurn(Board &board);
