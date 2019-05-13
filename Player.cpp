@@ -1,7 +1,8 @@
 #include "Player.h"
 
-using namespace std;
 
+using namespace std;
+extern map<char, gridCoord> keyBinds;
 
 Player::Player()
 {
@@ -34,8 +35,12 @@ void Player::humanTurn(Board &board) {
 
 			//if it is a valid input and board is empty at specified position
 			if (placeMove.row != -1 && board.isEmpty(placeMove.row, placeMove.col)) {
-
-				board.makeTurn(player, placeMove.row, placeMove.col);
+				if (placeMove.row == -2) {
+					board.reset();
+				}
+				else {
+					board.makeTurn(player, placeMove.row, placeMove.col);
+				}
 			}
 			else {//display error and continue
 					cout << "\nInvalid Input. Try again\n";
@@ -49,6 +54,23 @@ void Player::humanTurn(Board &board) {
 
 	} while (eSeconds < 10); // 10sec timer
 
+}
+
+gridCoord Player::handleInput() {
+	char buttonPress = _getch();
+	//fflush();
+	if (buttonPress == 'r' || buttonPress == 'R') {
+		return { -2,0 };
+	}
+	else if (buttonPress == 'q' || 'Q') {
+		exit(0);
+	}
+	else if ((buttonPress >= 'a' && buttonPress <= 'i') || (buttonPress >= 'A' && buttonPress <='I')){
+		return keyBinds[buttonPress];
+	}
+	else {
+		return { -1,0 };
+	}
 }
 
 Player::~Player()

@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <iostream>
 #include "KeyMap.h"
+#include <map>
 
 using std::string;
 
