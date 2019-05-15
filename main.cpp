@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <iostream>;
+#include "Player.h"
 #include "KeyMap.h";
 
 using namespace std;
@@ -9,6 +10,8 @@ void initializePvE();
 void gameLoop(int mode);
 
 Board board;
+Player *player1;
+Player *player2;
 
 int main() {
 	initializeKeyBind();
@@ -73,6 +76,19 @@ int main() {
 
 void initializePvP() {
 	board.reset();
+	system("cls");
+	char temp[256];
+	string name;
+
+	cout << "\nPlayer 1, enter your name:\n";
+	cin.getline(temp, 256);
+	name = temp;
+	player1 = new Player('X', name, true);
+
+	cout << "\nPlayer 2, enter your name:\n";
+	cin.getline(temp, 256);
+	name = temp;
+	player2 = new Player('O', name, true);
 	gameLoop(1);
 }
 
