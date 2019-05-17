@@ -142,6 +142,18 @@ bool Board::isEmpty(int row, int col) {
 	}
 }
 
+int Board::rowValue(int row) {
+	return board[row][0].value + board[row][1].value + board[row][2].value;
+}
+
+int Board::colValue(int col) {
+	return board[0][col].value + board[1][col].value + board[2][col].value;
+}
+
+int Board::value(int row, int col) {
+	return board[row][col].value;
+}
+
 Board::~Board()
 {
 }

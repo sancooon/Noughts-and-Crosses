@@ -6,6 +6,8 @@
 #include <iostream>
 #include "KeyMap.h"
 #include <map>
+#include <cstdlib>
+#include <ctime>
 
 using std::string;
 
@@ -16,6 +18,7 @@ public:
 	Player(char side, string name, bool humanP);
 	~Player();
 
+	string getName();
 	void makeTurn(Board &board);
 	
 private:

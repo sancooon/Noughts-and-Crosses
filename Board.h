@@ -9,6 +9,9 @@ public:
 	void makeTurn(char player, int row, int collumn);
 	void reset();
 	bool isEmpty(int row, int col);
+	int rowValue(int row);
+	int colValue(int col);
+	int value(int row, int col);
 private:
 	struct Node {
 		bool occupied;
