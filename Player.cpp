@@ -2,6 +2,7 @@
 
 
 using namespace std;
+//use an existing map object
 extern map<char, gridCoord> keyBinds;
 
 Player::Player()
@@ -9,12 +10,14 @@ Player::Player()
 }
 
 Player::Player(char side, string playerName, bool humanP) {
+	//initialize the player with a side, name and if it is human
 	name = playerName;
 	player = side;
 	human = humanP;
 }
 
 void Player::makeTurn(Board &board) {
+	//call the correct turn making process depeding on whether the player is human
 	if (human) {
 		humanTurn(board);
 	}
@@ -24,22 +27,24 @@ void Player::makeTurn(Board &board) {
 }
 
 void Player::humanTurn(Board &board) {
+	//record time at start of turn
 	auto timeStart = chrono::steady_clock::now();
 	int eSeconds;
 	do {
 
-		//input handling
+		//input handling. if player hits keyboard, game will record pressed key.
 		if (_kbhit()) {
 			//get grid coord
 			gridCoord placeMove = handleInput();
 
 			//if it is a valid input and board is empty at specified position
 			if (placeMove.row != -1 && board.isEmpty(placeMove.row, placeMove.col)) {
+				//if returned the reset key
 				if (placeMove.row == -2) {
 					board.reset();
 					break;
 				}
-				else {
+				else { //otherwise play the move and end turn
 					board.makeTurn(player, placeMove.row, placeMove.col);
 					break;
 				}
@@ -52,6 +57,7 @@ void Player::humanTurn(Board &board) {
 
 		//calculate delta time since start of turn
 		auto timeNow = chrono::steady_clock::now();
+		//get elapsed time since start of turn
 		eSeconds = chrono::duration_cast<chrono::duration<int>>(timeNow-timeStart).count();
 
 	} while (eSeconds < 10); // 10sec timer
@@ -206,6 +212,7 @@ void Player::cpuTurn(Board &board) {
 	//randomize the computer's turn
 	int row;
 	int col;
+	//keep randomizing position until an unfilled spot is found
 	do {
 		row = rand() % 3;
 		col = rand() % 3;
@@ -215,23 +222,25 @@ void Player::cpuTurn(Board &board) {
 }
 
 gridCoord Player::handleInput() {
+	//get the value of the button press
 	char buttonPress = _getch();
-	//fflush();
+	//if player pressed reset key then return row value of -2
 	if (buttonPress == 'r' || buttonPress == 'R') {
 		return { -2,0 };
 	}
-	else if (buttonPress == 'q' || buttonPress == 'Q') {
+	else if (buttonPress == 'q' || buttonPress == 'Q') { // player pressed quit button so exit game
 		exit(0);
 	}
-	else if ((buttonPress >= 'a' && buttonPress <= 'i') || (buttonPress >= 'A' && buttonPress <='I')){
+	else if ((buttonPress >= 'a' && buttonPress <= 'i') || (buttonPress >= 'A' && buttonPress <='I')){ //if player pressed button within bounds of the game field. return mapped key
 		return keyBinds[buttonPress];
 	}
-	else {
+	else { //otherwise out of bounds keypress, return row val of -1
 		return { -1,0 };
 	}
 }
 
 string Player::getName() {
+	//return name of player
 	return name;
 }
 

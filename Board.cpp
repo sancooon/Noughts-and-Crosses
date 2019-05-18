@@ -7,7 +7,7 @@ using std::endl;
 
 Board::Board()
 {
-	
+	//initialize board so it is empty and not occupied
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
 			board[i][j].occupied = false;
@@ -19,8 +19,10 @@ Board::Board()
 
 void Board::draw() {
 	char index = 'A';
+	//draw board
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
+			//if position is occupied, display X or O. Otherwise show the key needed to play that position
 			if (board[i][j].occupied) {
 				cout << board[i][j].player<<'|';
 			}
@@ -31,8 +33,10 @@ void Board::draw() {
 			index++;
 		}
 
+		//new line for the new line of the board
 		cout << endl;
 
+		//if it is not the end of the board, print the horizontal separators
 		if (i == 2) {
 			break;
 		}
@@ -52,6 +56,7 @@ char Board::checkWin() {
 			sum += board[i][j].value;
 		}
 
+		//return if player has won
 		if (sum == 15) {
 			return 'x';
 		}
@@ -67,6 +72,7 @@ char Board::checkWin() {
 			sum += board[j][i].value;
 		}
 
+		//return if player has won
 		if (sum == 15) {
 			return 'x';
 		}
@@ -75,7 +81,7 @@ char Board::checkWin() {
 		}
 	}
 	
-	//check for diagonal wins
+	//check for diagonal wins and return if won
 	int sum = board[0][0].value + board[1][1].value + board[2][2].value;
 	if (sum == 15) {
 		return 'x';
@@ -97,7 +103,7 @@ char Board::checkWin() {
 	bool tie = true;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
-			//no one has won. empty space available
+			//no one has won. empty space available return not over
 			if (!board[i][j].occupied) {
 				return 'n';
 			}
@@ -111,6 +117,7 @@ char Board::checkWin() {
 void Board::makeTurn(char player, int row, int collumn) {
 	int iValue;
 
+	//decide the value to associate with the symbon
 	if (player == 'O') {
 		iValue = 1;
 	}
@@ -118,12 +125,14 @@ void Board::makeTurn(char player, int row, int collumn) {
 		iValue = 5;
 	}
 
+	//occopy the selected space
 	board[row][collumn].occupied = true;
 	board[row][collumn].value = iValue;
 	board[row][collumn].player = player;
 }
 
 void Board::reset() {
+	//reset the board back to its initial condition
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
 			board[i][j].occupied = false;
@@ -134,6 +143,7 @@ void Board::reset() {
 }
 
 bool Board::isEmpty(int row, int col) {
+	//returns whether or not the specified position is filled
 	if (board[row][col].occupied == true) {
 		return false;
 	}
@@ -143,14 +153,17 @@ bool Board::isEmpty(int row, int col) {
 }
 
 int Board::rowValue(int row) {
+	//returns the total value of the specified row
 	return board[row][0].value + board[row][1].value + board[row][2].value;
 }
 
 int Board::colValue(int col) {
+	//returns total value of specified collumn
 	return board[0][col].value + board[1][col].value + board[2][col].value;
 }
 
 int Board::value(int row, int col) {
+	//returns value of specified position
 	return board[row][col].value;
 }
 

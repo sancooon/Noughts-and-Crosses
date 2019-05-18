@@ -4,6 +4,7 @@
 using namespace std;
 map<char, gridCoord> keyBinds;
 
+//initialize the keybind map.
 void initializeKeyBind() {
 	keyBinds.insert(pair<char, gridCoord>('a', { 0, 0 }));
 	keyBinds.insert(pair<char, gridCoord>('A', { 0, 0 }));
