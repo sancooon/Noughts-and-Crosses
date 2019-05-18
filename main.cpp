@@ -182,7 +182,7 @@ void gameLoop(int mode) {
 		cout << "Player " << player1->getName() << " has won\n";
 		break;
 	case 'o':
-		cout << "Player " << player2->getName() << "has won\n";
+		cout << "Player " << player2->getName() << " has won\n";
 		break;
 	case 'd':
 		cout << "Draw!\n";
